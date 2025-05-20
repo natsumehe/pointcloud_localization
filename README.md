@@ -7,7 +7,24 @@
 - `docs/`：项目文档与说明文件。
 - `README.md`：项目简介、安装方法、使用说明等。
 
-请根据实际文件夹结构补充详细内容。
+``` 
+pointcloud_localization/
+├── CMakeLists.txt
+├── include/
+│   ├── voxelizer.hpp          # Step1: 三维栅格化 & 特征提取
+│   ├── score_table.hpp        # Step2: 得分查表构建
+│   ├── csm_matcher.hpp        # Step3: 全局搜索与配准
+│   └── types.hpp              # 通用数据结构（点、栅格索引、姿态）
+├── src/
+│   ├── voxelizer.cpp
+│   ├── score_table.cpp
+│   ├── csm_matcher.cpp
+│   └── main.cpp               # 程序入口
+├── data/
+│   └── sample_map.pcd         # 地图点云样例
+├── build/                     # CMake 构建输出
+└── README.md
+```
 
 
 ### 三维栅格划分与多元统计信息融合的全局点云定位方法实现方法流程
@@ -31,6 +48,5 @@
 CSM的全局搜索方法是已经有的技术方案，就是采用多分辨形式的分支界定算法来实现的，不是本发明要求保护的创新点所在，因此，此处不作详细赘述。
 采用本发明基于多元统计信息的全局定位方法对点云地图进行处理，实现激光雷达点云与地图的配准，配准结果其中，白色点云为高精度矢量地图，黄色点云为初始待匹配点云，红色点云为配准后点云，其中，红色点云能够和地图完全匹配，黄色没有匹配，只是为了表征在巨大旋转和位移误差下面，该方案也能有效实现点云和地图的匹配。
 
+#### 其中依赖的点云处理第三方库为[PCL](https://pointclouds.org/)（主要用于处理）和[open3d](https://www.open3d.org/)（主要用于显示）
 
-[PCL]: https://pointclouds.org/
-[open3d]: https://www.open3d.org/
